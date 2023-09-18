@@ -41,8 +41,8 @@ $sizes: (
   flex-shrink: 0;
   @each $name, $size in $sizes {
     &.#{$name} {
-      width: #{$size}px;
-      height: #{$size}px;
+      width: #{$size / 16}rem;
+      height: #{$size / 16}rem;
     }
   }
   svg {

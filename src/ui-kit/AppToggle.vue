@@ -1,10 +1,15 @@
 <script setup lang="ts">
 const props = defineProps<{
   modelValue: boolean;
+  label: string;
 }>();
 </script>
 <template>
   <label class="toggle">
+    <span v-if="props.label || $slots.label" class="body-16 toggle__label">
+      {{ props.label || "" }}
+      <slot name="label" />
+    </span>
     <input
       type="checkbox"
       :checked="props.modelValue"
@@ -21,6 +26,10 @@ const props = defineProps<{
 .toggle {
   position: relative;
   display: flex;
+  align-items: center;
+  &__label {
+    margin-right: auto;
+  }
   &__container {
     position: relative;
     padding: rem(3) rem(8);

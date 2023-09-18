@@ -55,7 +55,7 @@ const isOpen = ref(false);
     <div class="template-select__header">
       <div class="template-select__img">
         <img
-          v-if="props.modelValue.imgSrc.length"
+          v-if="props.modelValue.imgSrc?.length"
           :src="props.modelValue.imgSrc"
           alt=""
         />

@@ -1,0 +1,25 @@
+type UserId__1 = principal;
+type UserId = principal;
+type Profile = 
+ record {
+   email_notification: bool;
+   fullname: text;
+   id: UserId;
+   show_wallet_number: bool;
+   system_notification: bool;
+ };
+type NewProfile = 
+ record {
+   email_notification: bool;
+   fullname: text;
+   show_wallet_number: bool;
+   system_notification: bool;
+ };
+service : {
+  create: (NewProfile) -> ();
+  get: (UserId__1) -> (Profile) query;
+  getOwnId: () -> (UserId__1) query;
+  healthcheck: () -> (bool);
+  search: (text) -> (vec Profile) query;
+  update: (Profile) -> ();
+}

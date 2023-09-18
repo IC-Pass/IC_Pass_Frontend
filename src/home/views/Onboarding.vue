@@ -10,6 +10,7 @@ import onBoarding2Img from "@/assets/images/onboarding/Onboarding 2.png";
 import onBoarding3Img from "@/assets/images/onboarding/Onboarding 3.png";
 import onBoarding4Img from "@/assets/images/onboarding/Onboarding 4.png";
 import AppButton from "@/ui-kit/AppButton.vue";
+import {useHomeStore} from "@/home/domain/homeStore";
 
 const modules = [Pagination];
 const swiper = ref();
@@ -42,13 +43,18 @@ const pagination = {
   clickable: true,
   el: ".onboarding__pagination",
 };
+const homeStore = useHomeStore();
+
 function slideNext() {
   slider.value.slideNext();
+}
+function finishOnboarding() {
+  homeStore.activeCard = "";
 }
 </script>
 <template>
   <div class="onboarding">
-    <button class="onboarding__skip body-14">Skip</button>
+    <button class="onboarding__skip body-14" @click="finishOnboarding">Skip</button>
     <div class="onboarding__pagination" />
     <Swiper
       ref="swiper"
@@ -76,7 +82,12 @@ function slideNext() {
     >
       Next
     </AppButton>
-    <AppButton class="onboarding__btn" type="primary" @click="slideNext" v-else>
+    <AppButton
+      class="onboarding__btn"
+      type="primary"
+      @click="finishOnboarding"
+      v-else
+    >
       Get started
     </AppButton>
   </div>

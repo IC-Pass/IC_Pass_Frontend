@@ -6,6 +6,7 @@ const props = withDefaults(
   defineProps<{
     isBack?: boolean;
     autoHeight?: boolean;
+    narrowContent?: boolean;
   }>(),
   {
     isBack: false,
@@ -24,14 +25,18 @@ const contentHeight = computed(() => {
 });
 </script>
 <template>
-  <div class="home-card" :class="{ autoHeight: autoHeight }" ref="cardRef">
-    <div class="home-card__header" ref="headerRef">
+  <div
+    class="home-card"
+    :class="{ autoHeight: autoHeight, narrowContent: narrowContent }"
+    ref="cardRef"
+  >
+    <div class="home-card__header" ref="headerRef" v-if="$slots.header">
       <div class="home-card__back" v-if="props.isBack" @click="$emit('back')">
         <AppIcon size="xxl" name="chevron-left" />
       </div>
       <slot name="header" />
     </div>
-    <div class="home-card__content" :style="{ height: contentHeight + 'px' }">
+    <div class="home-card__content">
       <slot />
     </div>
     <div class="home-card__footer" ref="footerRef" v-if="$slots.footer">
@@ -52,6 +57,9 @@ const contentHeight = computed(() => {
   height: rem(672);
   &.autoHeight {
     align-self: flex-end;
+  }
+  &.narrowContent &__content {
+    padding: rem(16) rem(8);
   }
   &__header {
     border-bottom: 1px solid $color-grey-700;

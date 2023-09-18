@@ -5,10 +5,9 @@ import HomeCard from "@/home/views/parts/HomeCard.vue";
 import AppChipsItem from "@/ui-kit/AppChipsItem.vue";
 
 const historyStore = useHistoryStore();
-
 </script>
 <template>
-  <HomeCard class="history">
+  <HomeCard class="history" narrow-content>
     <template #header>
       <div class="history__tags">
         <AppChipsItem

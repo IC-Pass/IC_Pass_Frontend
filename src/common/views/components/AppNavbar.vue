@@ -1,28 +1,19 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import AppIcon from "@/ui-kit/AppIcon.vue";
-import { useRouter, useRoute } from "vue-router";
+import { useRoute } from "vue-router";
 import AppBlockChainBtn from "@/common/views/components/AppBlockChainBtn.vue";
-
-const router = useRouter();
 const route = useRoute();
 
 const full = "25rem";
-const rolled = "7.7rem";
-
-const width = ref(full);
-
-function handleWidth() {
-  width.value = width.value === full ? rolled : full;
-}
 
 const isDropdown = ref(true);
 
 const links = [
   {
     icon: "home",
-    name: "All passwords",
-    route: "Onboarding",
+    name: "Home",
+    route: "Home",
     children: [],
   },
   {
@@ -40,21 +31,21 @@ const links = [
   {
     icon: "members",
     name: "Members",
-    route: "",
+    route: "Members",
     children: [],
     chips: "Coming soon",
   },
   {
     icon: "team",
     name: "Team",
-    route: "",
+    route: "Team",
     children: [],
     chips: "Coming soon",
   },
   {
     icon: "settings",
     name: "Settings",
-    route: "",
+    route: "Settings",
     children: [],
   },
 ];
@@ -65,7 +56,7 @@ function checkRoute(currentRouteName: string): boolean {
 </script>
 
 <template>
-  <div class="navbar" @click.self="handleWidth">
+  <div class="navbar">
     <div class="navbar__list">
       <div
         v-for="link in links"
@@ -73,7 +64,6 @@ function checkRoute(currentRouteName: string): boolean {
         class="navbar__list-item"
         :class="{
           active: link.route === $route.name,
-          rolled: width === rolled,
         }"
       >
         <div class="navbar__link-header">
@@ -81,12 +71,9 @@ function checkRoute(currentRouteName: string): boolean {
             <AppIcon
               class="navbar__icon"
               size="xxl"
-              :class="{
-                rolled: width === rolled,
-              }"
               :name="link.icon"
             />
-            <span class="navbar__item" v-if="width === full">
+            <span class="navbar__item">
               {{ link.name }}
             </span>
             <span class="navbar__item-chips" v-if="link.chips">
@@ -97,12 +84,12 @@ function checkRoute(currentRouteName: string): boolean {
             class="navbar__chevron"
             :class="{ reverse: !isDropdown }"
             @click="isDropdown = !isDropdown"
-            v-if="link.children.length && width === full"
+            v-if="link.children.length"
           >
             <AppIcon name="chevron-down" size="xs" />
           </button>
         </div>
-        <template v-if="link.children.length && width === full">
+        <template v-if="link.children.length">
           <Transition>
             <div class="navbar__dropdown" v-if="isDropdown">
               <router-link

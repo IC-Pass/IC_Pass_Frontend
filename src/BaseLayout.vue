@@ -39,6 +39,7 @@ import AppLogo from "@/ui-kit/AppLogo.vue";
   main {
     overflow-y: auto;
     flex-grow: 1;
+    height: rem(672);
   }
   &__content {
     display: flex;

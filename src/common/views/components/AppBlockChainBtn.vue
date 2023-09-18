@@ -1,5 +1,10 @@
+<script setup lang="ts">
+import { useAuthStore } from "@/auth/domain/authStore";
+
+const authStore = useAuthStore();
+</script>
 <template>
-  <a href="" class="block-chain-btn">
+  <button @click="authStore.login" class="block-chain-btn">
     <svg
       width="272"
       height="42"
@@ -109,14 +114,18 @@
       />
       <path
         d="M263 1.00001L9.00004 1.00022C4.58177 1.00022 1.00005 4.58194 1.00004 9.00021L1.00001 32.9998C1.00001 37.418 4.58173 40.9998 9.00001 40.9998H263C267.418 40.9998 271 37.418 271 32.9998V9.00001C271 4.58173 267.418 1 263 1.00001Z"
-        stroke="#313233"
+        stroke="transparent"
       />
     </svg>
-  </a>
+  </button>
 </template>
 <style lang="scss">
 .block-chain-btn {
+  background: none;
+  cursor: pointer;
   display: block;
+  border: 1px solid #313233;
+  border-radius: 8px;
   svg {
     display: block;
     width: 100%;

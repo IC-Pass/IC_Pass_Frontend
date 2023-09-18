@@ -17,3 +17,31 @@ app.use(dayjs);
 app.use(setupCalendar, {});
 
 app.mount("#app");
+
+const defaultWidth = 1512,
+  defaultFont = 16,
+  minWidth = 768,
+  minHeight = 500,
+  defaultHeight = 902;
+let vW = window.innerWidth,
+  vH = window.innerHeight;
+const page = document.querySelector("html");
+
+const fontSize = () => {
+  return (
+    defaultFont *
+    Math.min(
+      Math.max(minWidth, vW) / defaultWidth,
+      Math.max(minHeight, vH) / defaultHeight
+    )
+  );
+};
+const calculate = () => {
+  vW = window.innerWidth;
+  vH = window.innerHeight;
+  if (page) {
+    page.style.fontSize = fontSize() + "px";
+  }
+};
+
+window.addEventListener("resize", calculate);

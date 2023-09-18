@@ -10,6 +10,8 @@
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore"
   },
   "dependencies": {
+    "@dfinity/agent": "^0.19.1",
+    "@dfinity/auth-client": "^0.19.1",
     "@popperjs/core": "^2.11.7",
     "@soerenmartius/vue3-clipboard": "^0.1.2",
     "@types/node": "^18.15.5",

@@ -7,9 +7,16 @@ import AppPopUp from "@/common/views/components/AppPopUp.vue";
 import BaseLayout from "@/BaseLayout.vue";
 import AppHeader from "@/common/views/components/AppHeader.vue";
 import AppNavbar from "@/common/views/components/AppNavbar.vue";
-import AuthLayout from "@/AuthLayout.vue";
-import AppLoader from "@/ui-kit/AppLoader.vue";
 import AppDialog from "@/common/views/components/AppDialog.vue";
+
+import { storeToRefs } from "pinia";
+import { useAuthStore } from "@/auth/domain/authStore";
+
+const authStore = useAuthStore();
+const { isReady } = storeToRefs(authStore);
+if (isReady.value === false) {
+  authStore.init();
+}
 
 const errorsStore = useErrorsStore();
 const popUpStore = usePopUpStore();
