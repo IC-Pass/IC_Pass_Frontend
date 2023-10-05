@@ -15,11 +15,22 @@ type NewProfile =
    show_wallet_number: bool;
    system_notification: bool;
  };
+type newPassword =
+    record {
+        id:principal;
+        tagId:nat8;
+        link:text;
+        password:text;
+        usernameEmail:text;
+        notes:text;
+        mediaId:nat8
+    };
 service : {
-  create: (NewProfile) -> ();
-  get: (UserId__1) -> (Profile) query;
-  getOwnId: () -> (UserId__1) query;
-  healthcheck: () -> (bool);
-  search: (text) -> (vec Profile) query;
-  update: (Profile) -> ();
+    addNewAccount: (newPassword) -> (variant {ok:text; err:text})
+    create: (NewProfile) -> ();
+    get: (UserId__1) -> (Profile) query;
+    getOwnId: () -> (UserId__1) query;
+    healthcheck: () -> (bool);
+    search: (text) -> (vec Profile) query;
+    update: (Profile) -> ();
 }

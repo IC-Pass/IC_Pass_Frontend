@@ -1,10 +1,10 @@
 import { defineStore } from "pinia";
 import { ref } from "vue";
 import type { Password } from "@/home/domain/Password";
-import {useHistoryStore} from "@/history/domain/historyStore";
+import { useHistoryStore } from "@/history/domain/historyStore";
 import facebook from "@/assets/images/socialMedia/Facebook.jpg";
-import type {PassListItem} from "@/common/domain/PassListItem";
-import {useHomeStore} from "@/home/domain/homeStore";
+import type { PassListItem } from "@/common/domain/PassListItem";
+import { useHomeStore } from "@/home/domain/homeStore";
 
 export const usePasswordStore = defineStore("passwordStore", () => {
   const historyStore = useHistoryStore();
@@ -13,7 +13,7 @@ export const usePasswordStore = defineStore("passwordStore", () => {
 
   const password = ref<Password | PassListItem | null>({
     template: "",
-    email: "",
+    usernameEmail: "",
     password: "",
     link: "",
     tag: {
@@ -29,7 +29,7 @@ export const usePasswordStore = defineStore("passwordStore", () => {
   function resetStore() {
     password.value = {
       template: "",
-      email: "",
+      usernameEmail: "",
       password: "",
       link: "",
       tag: {
@@ -39,9 +39,19 @@ export const usePasswordStore = defineStore("passwordStore", () => {
       notes: "",
     };
   }
-  function createPassword() {
-    historyStore.historyList.push(JSON.parse(JSON.stringify(password.value)) as PassListItem);
-    console.log(password.value);
+  async function createPassword() {
+    /*const obj = {
+      id: "",
+      tagId: "",
+      link: "",
+      password: "",
+      usernameEmail: "",
+      notes: "",
+      mediaId: "",
+    };*/
+    historyStore.historyList.push(
+      JSON.parse(JSON.stringify(password.value)) as PassListItem
+    );
     resetStore();
     homeStore.activeCard = "";
   }

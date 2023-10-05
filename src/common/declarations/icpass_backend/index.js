@@ -33,27 +33,27 @@ See https://internetcomputer.org/docs/current/developer-docs/updates/release-not
 
   const idlFactory_ = ({ IDL }) => {
     const NewProfile = IDL.Record({
-      'show_wallet_number' : IDL.Bool,
-      'fullname' : IDL.Text,
-      'system_notification' : IDL.Bool,
-      'email_notification' : IDL.Bool,
+      "show_wallet_number" : IDL.Bool,
+      "fullname" : IDL.Text,
+      "system_notification" : IDL.Bool,
+      "email_notification" : IDL.Bool,
     });
     const UserId__1 = IDL.Principal;
     const UserId = IDL.Principal;
     const Profile = IDL.Record({
-      'id' : UserId,
-      'show_wallet_number' : IDL.Bool,
-      'fullname' : IDL.Text,
-      'system_notification' : IDL.Bool,
-      'email_notification' : IDL.Bool,
+      "id" : UserId,
+      "show_wallet_number" : IDL.Bool,
+      "fullname" : IDL.Text,
+      "system_notification" : IDL.Bool,
+      "email_notification" : IDL.Bool,
     });
     return IDL.Service({
-      'create' : IDL.Func([NewProfile], [], ['call']),
-      'get' : IDL.Func([UserId__1], [Profile], ['query']),
-      'getOwnId' : IDL.Func([], [UserId__1], ['query']),
-      'healthcheck' : IDL.Func([], [IDL.Bool], []),
-      'search' : IDL.Func([IDL.Text], [IDL.Vec(Profile)], ['query']),
-      'update' : IDL.Func([Profile], [], []),
+      "create" : IDL.Func([NewProfile], [], ["call"]),
+      "get" : IDL.Func([UserId__1], [Profile], ["query"]),
+      "getOwnId" : IDL.Func([], [UserId__1], ["query"]),
+      "healthcheck" : IDL.Func([], [IDL.Bool], []),
+      "search" : IDL.Func([IDL.Text], [IDL.Vec(Profile)], ["query"]),
+      "update" : IDL.Func([Profile], [], []),
     });
   };
   // Creates an actor with using the candid interface and the HttpAgent

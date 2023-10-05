@@ -1,6 +1,6 @@
 export type Password = {
   template: string;
-  email: string;
+  usernameEmail: string;
   password: string;
   link: string;
   tag: {

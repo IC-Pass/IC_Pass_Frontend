@@ -105,7 +105,6 @@ export const useAuthStore = defineStore("auth", () => {
         console.log(e);
       });
       const principal = await whoamiActor.value.getOwnId();
-      console.log(await whoamiActor.value.get(principal));
     } catch (e) {
       console.log(e);
     }
@@ -129,4 +128,5 @@ export const useAuthStore = defineStore("auth", () => {
     identity,
     whoamiActor,
   };
+
 });

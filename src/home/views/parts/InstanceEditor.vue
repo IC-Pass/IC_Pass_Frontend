@@ -71,8 +71,10 @@ onMounted(() => {
               type="email"
               label="Login or email"
               placeholder="Type here"
-              :default="passwordStore.password.email"
-              @handleInputValue="(value) => (passwordStore.password.email = value)"
+              :default="passwordStore.password.usernameEmail"
+              @handleInputValue="
+                (value) => (passwordStore.password.usernameEmail = value)
+              "
             />
           </div>
           <div class="main-card-list__item">
