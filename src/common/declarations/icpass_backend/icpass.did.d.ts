@@ -34,4 +34,6 @@ export interface _SERVICE {
   "healthcheck": ActorMethod<[], boolean>,
   "search": ActorMethod<[string], Array<Profile>>,
   "update": ActorMethod<[Profile], undefined>,
+  "encrypted_ibe_decryption_key_for_caller": ActorMethod<[string]>,
+  "ibe_encryption_key": ActorMethod<[string]>,
 }

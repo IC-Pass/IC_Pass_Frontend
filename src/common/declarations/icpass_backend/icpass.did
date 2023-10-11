@@ -26,11 +26,13 @@ type newPassword =
         mediaId:nat8
     };
 service : {
-    addNewAccount: (newPassword) -> (variant {ok:text; err:text})
+    addNewAccount: (newPassword) -> (variant {ok:text; err:text});
     create: (NewProfile) -> ();
     get: (UserId__1) -> (Profile) query;
     getOwnId: () -> (UserId__1) query;
     healthcheck: () -> (bool);
     search: (text) -> (vec Profile) query;
     update: (Profile) -> ();
+    ibe_encryption_key: () -> (text);
+    encrypted_ibe_decryption_key_for_caller: (vec nat8) → (text);
 }

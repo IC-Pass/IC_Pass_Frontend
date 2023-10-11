@@ -47,13 +47,25 @@ See https://internetcomputer.org/docs/current/developer-docs/updates/release-not
       "system_notification" : IDL.Bool,
       "email_notification" : IDL.Bool,
     });
+    const newPassword = IDL.Record({
+      "id": IDL.Principal,
+      "tagId": IDL.nat8,
+      "link": IDL.text,
+      "password": IDL.text,
+      "usernameEmail": IDL.text,
+      "notes": IDL.text,
+      "mediaId": IDL.nat8
+    });
     return IDL.Service({
       "create" : IDL.Func([NewProfile], [], ["call"]),
+      "addNewAccount": IDL.Func([newPassword], [], ["variant"]),
       "get" : IDL.Func([UserId__1], [Profile], ["query"]),
       "getOwnId" : IDL.Func([], [UserId__1], ["query"]),
       "healthcheck" : IDL.Func([], [IDL.Bool], []),
       "search" : IDL.Func([IDL.Text], [IDL.Vec(Profile)], ["query"]),
       "update" : IDL.Func([Profile], [], []),
+      "encrypted_ibe_decryption_key_for_caller": IDL.Func([IDL.Vec.nat8], [], ["call"]),
+      "ibe_encryption_key": IDL.Func([],[],["call"]),
     });
   };
   // Creates an actor with using the candid interface and the HttpAgent

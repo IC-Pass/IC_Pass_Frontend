@@ -24,13 +24,15 @@ export const idlFactory = ({ IDL }) => {
     "mediaId": IDL.nat8
   });
   return IDL.Service({
-    "addNewAccount": IDL.Func([newPassword], [], ["variant"]),
-    "create" : IDL.Func([NewProfile], [], []),
+    "addNewAccount": IDL.Func([newPassword], [], ["call"]),
+    "create" : IDL.Func([NewProfile], [], ["call"]),
     "get" : IDL.Func([UserId__1], [Profile], ["query"]),
     "getOwnId" : IDL.Func([], [UserId__1], ["query"]),
-    "healthcheck" : IDL.Func([], [IDL.Bool], []),
+    "healthcheck" : IDL.Func([], [IDL.Bool], ["call"]),
     "search" : IDL.Func([IDL.Text], [IDL.Vec(Profile)], ["query"]),
-    "update" : IDL.Func([Profile], [], []),
+    "update" : IDL.Func([Profile], [], ["call"]),
+    "encrypted_ibe_decryption_key_for_caller": IDL.Func([IDL.Vec.nat8], [], ["call"]),
+    "ibe_encryption_key": IDL.Func([],[],["call"]),
   });
 };
 export const init = ({ IDL }) => [];

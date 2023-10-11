@@ -2,9 +2,9 @@ import { defineStore } from "pinia";
 import { ref } from "vue";
 import type { Password } from "@/home/domain/Password";
 import { useHistoryStore } from "@/history/domain/historyStore";
-import facebook from "@/assets/images/socialMedia/Facebook.jpg";
 import type { PassListItem } from "@/common/domain/PassListItem";
 import { useHomeStore } from "@/home/domain/homeStore";
+import { useAuthStore } from "@/auth/domain/authStore";
 
 export const usePasswordStore = defineStore("passwordStore", () => {
   const historyStore = useHistoryStore();

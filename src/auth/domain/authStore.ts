@@ -35,7 +35,7 @@ const defaultOptions = {
     },
   },
   loginOptions: {
-    identityProvider: "https://identity.ic0.app/#authorize"
+    identityProvider: "https://identity.ic0.app/#authorize",
   },
 };
 
@@ -58,6 +58,8 @@ export const useAuthStore = defineStore("auth", () => {
 
   const identity = ref<Identity | null>(null);
 
+  const ibe_encryption_key = ref<string | unknown>("");
+
   const whoamiActor = ref<ActorSubclass<
     Record<string, ActorMethod<unknown[], unknown>>
   > | null>(null);
@@ -70,26 +72,29 @@ export const useAuthStore = defineStore("auth", () => {
     identity.value = isAuthenticated.value
       ? authClient.value.getIdentity()
       : null;
-
     whoamiActor.value = identity.value
-      ? await actorFromIdentity(identity)
+      ? await actorFromIdentity(identity.value)
       : null;
     isReady.value = true;
+    console.log(await whoamiActor.value.healthcheck());
   }
-
+  async function auth() {
+    console.log("fd");
+    ibe_encryption_key.value = await whoamiActor.value?.getOwnId();
+    console.log(ibe_encryption_key.value);
+  }
   async function login() {
     const client = toRaw(authClient.value);
     client?.login({
       ...defaultOptions.loginOptions,
       onSuccess: async () => {
         isAuthenticated.value = await client.isAuthenticated();
-        identity.value = isAuthenticated.value
-          ? client.getIdentity()
-          : null;
+        identity.value = isAuthenticated.value ? client.getIdentity() : null;
         whoamiActor.value = identity.value
           ? await actorFromIdentity(identity.value)
           : null;
         homeStore.isWelcomePass = false;
+        console.log(await whoamiActor.value?.healthcheck());
       },
     });
   }
@@ -104,7 +109,6 @@ export const useAuthStore = defineStore("auth", () => {
       await whoamiActor.value.create(profile).catch((e) => {
         console.log(e);
       });
-      const principal = await whoamiActor.value.getOwnId();
     } catch (e) {
       console.log(e);
     }
@@ -122,11 +126,12 @@ export const useAuthStore = defineStore("auth", () => {
     init,
     localCreateActor,
     login,
+    auth,
+    ibe_encryption_key,
     isReady,
     isAuthenticated,
     authClient,
     identity,
     whoamiActor,
   };
-
 });
